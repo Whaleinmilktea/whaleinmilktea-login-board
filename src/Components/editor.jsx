@@ -1,8 +1,11 @@
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-const Edior = () => {
-  return (
-    <Editor />
-  )
+function Editor () {
+  const [value, setValue] = useState('');
+
+  return <ReactQuill theme="snow" value={value} onChange={setValue} />;
 }
+
+export default Editor;
