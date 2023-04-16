@@ -1,4 +1,4 @@
-import Editor from '../Components/editor';
+import Editor from '../Components/Editor';
 
 const Board = () => {
   return (
