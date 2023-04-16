@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // 스타일링을 위한 CSS 임포트
+import 'react-quill/dist/quill.snow.css';
+import styled from 'styled-components';
 
-// Quill 에디터에 코드 블록 및 인라인 코드 기능을 활성화하기 위해 모듈을 설정합니다.
+const SubmitForm = styled.form``;
+const SubmitBtn = styled.button``;
+
 const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
+    [{ font: [] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     [
       { list: 'ordered' },
@@ -15,10 +19,9 @@ const modules = {
     ],
     ['link', 'image'],
     [{ color: [] }, { background: [] }],
-    [{ font: [] }],
     [{ align: [] }],
     [{ script: 'sub' }, { script: 'super' }],
-    ['code', 'code-block'], // 코드 블록 및 인라인 코드를 위한 기능 추가
+    ['code', 'code-block'],
     ['clean'],
   ],
 };
@@ -41,7 +44,7 @@ const formats = [
   'align',
   'script',
   'code',
-  'code-block', // 코드 블록 및 인라인 코드를 위한 포맷 추가
+  'code-block',
 ];
 
 function QuillEditor() {
@@ -51,15 +54,24 @@ function QuillEditor() {
     setContent(value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // form submit 이벤트의 기본 동작 방지
+    console.log(content); // 현재 content 값을 콘솔에 출력
+  };
+
   return (
     <div className="quill-editor">
-      <ReactQuill
-        value={content}
-        onChange={handleChange}
-        modules={modules}
-        formats={formats}
-        theme="snow" // snow 테마 사용
-      />
+      <SubmitForm onSubmit={handleSubmit}>
+        <ReactQuill
+          value={content}
+          onChange={handleChange}
+          modules={modules}
+          formats={formats}
+          theme="snow"
+        />
+        {/* 버튼의 타입을 지정 */}
+        <SubmitBtn type="submit">Submit</SubmitBtn>
+      </SubmitForm>
     </div>
   );
 }
